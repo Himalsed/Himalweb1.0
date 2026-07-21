@@ -23,8 +23,14 @@
 
     <!-- Favicon -->
     <link rel="icon"
-          type="image/png"
-          href="{{ url_for('static', filename='images/favicon.svg') }}">
+       <!-- Primary SVG Favicon -->
+<link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+
+<!-- Fallback for older browsers -->
+<link rel="icon" type="image/x-icon" sizes="32x32" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -33,17 +39,6 @@
 
     <meta property="og:description"
           content="Portfolio showcasing Python, Flask, AI, RAG, Machine Learning, and Full Stack Development projects.">
-
-    <meta property="og:url"
-          content="https://himalsedhai.com">
-
-    <meta property="og:image"
-          content="https://himalsedhai.com/static/images/preview.png">
-
-    <meta property="og:site_name"
-          content="Himal Sedhai">
-    <!-- Open Graph -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
