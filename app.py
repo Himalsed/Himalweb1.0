@@ -9,7 +9,7 @@ PROFILE = {
     "name": "Himal Sedhai",
     "role": "Full-Stack Developer",
     "tagline": "I am a Bachelor of Information Management (BIM) student from Nepal with a strong interest in Full Stack Development and Artificial Intelligence."
-"Currently, I'm building practical web applications while learning Machine Learning, Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG)."
+"Currently, I'm building practical web applications while learning Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG)."
     ,
     "location": "Based in Nepal",
     "email": "himalsedhai10@example.com",
@@ -109,6 +109,7 @@ PROJECTS = [
               "context-aware responses."
         ),
         "stack": "Flask · RAG · ChromaDB . LLM :Lama ",
+        
         "link": "https://github.com/Himalsed/Hotel-Hub",
     },
     {
@@ -122,6 +123,7 @@ PROJECTS = [
         
         
         "stack": "HTML5 · CSS· JAVASCRIPT·EXPRESS ·MongoDB·",
+        
         "link": "https://github.com/Himalsed/Book-Mgmt-Sys",
     }
     
