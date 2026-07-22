@@ -14,7 +14,7 @@ PROFILE = {
     "location": "Based in Nepal",
     "email": "himalsedhai10@example.com",
     "github": "https://github.com/Himalsed",
-    "linkedin": "https://linkedin.com/in/HimalSedhai",
+    "linkedin": "https://www.linkedin.com/in/himal-sedhai-32606a35b/",
 }
 
 ABOUT = {
