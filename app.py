@@ -84,49 +84,52 @@ TECH_STACKS = [
 PROJECTS = [
     {
         "id": 1,
-        "title": "DevMemory AI - powered CLI based Weapon",
+        "title": "DevMemory AI",
+        "status": "Featured",
+        "featured": True,
         "description": (
-    "A local AI assistant that helps developers remember and search their own codebase. "
-    "Developers work on multiple projects and often forget where they wrote a specific function, "
-    "how a feature was implemented, or where certain logic exists. "
-    "DevMemory AI solves this by creating a searchable memory of your code using embeddings, "
-    "vector search, and a local LLM. "
-    "The project runs locally, meaning your code stays on your machine."
+            "An AI-powered developer memory assistant that indexes your local codebase "
+            "using Retrieval-Augmented Generation (RAG). Instead of manually searching "
+            "through hundreds of files, developers can ask natural language questions "
+            "such as 'Where did I implement JWT authentication?' or "
+            "'Show me the API validation logic.' The system performs semantic search "
+            "with vector embeddings and generates context-aware answers using a local "
+            "LLM, ensuring complete privacy since everything runs offline."
         ),
-        "stack": "Flask · RAG · ChromaDB ·Typer. LLM :Olama ",
+        "stack": "Python • Flask • RAG • ChromaDB • Ollama • Typer",
         "link": "https://github.com/Himalsed/DevMemory-AI",
     },
 
-
-
-    
     {
         "id": 2,
-        "title": "Hotel-Hub" "Ai-powered using RAG for Hotels" ,
+        "title": "Hotel-Hub",
+        "status": "AI Project",
+        "featured": True,
         "description": (
-          "Hotel Knowledge Hub is an AI-powered chatbot that answers hotel-related questions using Retrieval-Augmented Generation (RAG)."
-          "  Instead of relying only on an LLM, it retrieves relevant information from hotel knowledge documents and generates accurate,"
-              "context-aware responses."
+            "An intelligent knowledge assistant built for hotels and hospitality businesses. "
+            "The chatbot retrieves information directly from hotel policies, SOPs, and "
+            "knowledge documents using Retrieval-Augmented Generation (RAG). "
+            "Instead of hallucinating responses, it provides accurate, document-backed "
+            "answers to help hotel staff access information instantly."
         ),
-        "stack": "Flask · RAG · ChromaDB . LLM :Lama ",
-        
+        "stack": "Python • Flask • LangChain • RAG • ChromaDB • Ollama",
         "link": "https://github.com/Himalsed/Hotel-Hub",
     },
+
     {
         "id": 3,
-        "title": "Book Sys MGMT",
+        "title": "Book Management System",
+        "status": "Full Stack",
+        "featured": False,
         "description": (
-           " A full-stack web application designed to manage a library or personal book collection. "
-            "This project allows users to perform core CRUD operations (Create, Read, Update, Delete) on books, track inventory, and manage authors."
+            "A modern full-stack CRUD application for managing books, authors, and "
+            "inventory. Users can add, edit, delete, and search books while keeping "
+            "records organized through a clean dashboard. The project demonstrates "
+            "RESTful routing, database operations, and responsive UI development."
         ),
-
-        
-        
-        "stack": "HTML5 · CSS· JAVASCRIPT·EXPRESS ·MongoDB·",
-        
+        "stack": "HTML • CSS • JavaScript • Express.js • MongoDB",
         "link": "https://github.com/Himalsed/Book-Mgmt-Sys",
     }
-    
 ]
 
 
