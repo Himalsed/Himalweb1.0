@@ -128,7 +128,7 @@ PROJECTS = [
             "RESTful routing, database operations, and responsive UI development."
         ),
         "stack": "HTML • CSS • JavaScript • Express.js • MongoDB",
-        "link": "https://github.com/Himalsed/Book-Mgmt-Sys",
+        "link": "https://book-management-sys-iv6d.vercel.app/",
     }
 ]
 
