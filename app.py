@@ -142,6 +142,7 @@ PROJECTS = [
       "link": "https://huecraft-ten.vercel.app/",
 
     }
+}
 ]
 
 
