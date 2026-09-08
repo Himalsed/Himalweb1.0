@@ -130,6 +130,18 @@ PROJECTS = [
         "stack": "HTML • CSS • JavaScript • Express.js • MongoDB",
         "link": "https://book-management-sys-iv6d.vercel.app/",
     }
+    {
+    "id":3,
+    "title":"Huecraft",
+    "status":"Full Stack",
+    "featured:False,
+    "description":("Huecraft is a browser theme studio for developers and designers"". It helps you explore color palettes, Google Fonts, motion presets, accessible contrast, ""and copy-ready CSS in one focused workspace."
+"The interface is intentionally lightweight:"" Flask serves the application shell and the design assistant, ""while the interactive theme editor runs in the browser."" There is no database, account system, or build step."
+                  ),
+    "stack": "Python • Flask • HTML • CSS • JAVASCRIPT",
+      "link": "https://huecraft-ten.vercel.app/",
+
+    }
 ]
 
 
