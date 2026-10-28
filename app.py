@@ -3,11 +3,14 @@ import secrets
 import smtplib
 from email.message import EmailMessage
 from email.utils import parseaddr
+from pathlib import Path
 
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for, flash
 
-load_dotenv()
+# Load the project's local .env regardless of the working directory. Variables
+# provided by the hosting platform take precedence over this local file.
+load_dotenv(Path(__file__).resolve().with_name(".env"))
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY") or secrets.token_hex(32)
@@ -195,9 +198,21 @@ def contact():
         ).replace(" ", "")
         recipient = (os.environ.get("CONTACT_RECIPIENT") or gmail_address).strip()
 
-        if not gmail_address or not gmail_app_password or not recipient:
+        missing_settings = []
+        if not gmail_address:
+            missing_settings.append("GMAIL_ADDRESS")
+        if not gmail_app_password:
+            missing_settings.append("GMAIL_APP_PASSWORD")
+        if not recipient:
+            missing_settings.append("CONTACT_RECIPIENT")
+
+        if missing_settings:
+            app.logger.error(
+                "Contact email is not configured; missing environment variable(s): %s",
+                ", ".join(missing_settings),
+            )
             flash(
-                "Email is not configured yet. Add your Gmail app password in the environment before sending.",
+                "Email sending is not configured on this server. Set the required Gmail environment variables and restart the app.",
                 "error",
             )
         else:
