@@ -1,7 +1,13 @@
+import os
+import secrets
+import smtplib
+from email.message import EmailMessage
+from email.utils import parseaddr
+
 from flask import Flask, render_template, request, redirect, url_for, flash
 
 app = Flask(__name__)
-app.secret_key = "portfolio-dev-key"
+app.secret_key = os.environ.get("FLASK_SECRET_KEY") or secrets.token_hex(32)
 
 
 
@@ -12,7 +18,10 @@ PROFILE = {
 "Currently, I'm building practical web applications while learning Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG)."
     ,
     "location": "Based in Nepal",
-    "email": "himalsedhai10@example.com",
+    "email": os.environ.get(
+        "CONTACT_RECIPIENT",
+        os.environ.get("GMAIL_ADDRESS", "himalsedhai10@example.com"),
+    ),
     "github": "https://github.com/Himalsed",
     "linkedin": "https://www.linkedin.com/in/himal-sedhai-32606a35b/",
 }
@@ -78,6 +87,25 @@ TECH_STACKS = [
             {"name": "SQLite", "icon": "devicon-sqlite-plain colored"},
             {"name": "MongoDB", "icon": "devicon-mongodb-plain colored"}
         ],
+    },
+]
+
+CERTIFICATES = [
+    {
+        "title": "Crash Course on Python",
+        "issuer": "Google",
+        "platform": "Coursera",
+        "date": "July 13, 2026",
+        "duration": "20 hours",
+        "link": "https://coursera.org/share/25c3fd8dc708ac2f08192295c31fef1b",
+    },
+    {
+        "title": "Build Dynamic User Interfaces (UI) for Websites",
+        "issuer": "Google",
+        "platform": "Coursera",
+        "date": "August 23, 2026",
+        "duration": "15 hours",
+        "link": "https://coursera.org/share/d5b3710a626bd558bfd54880c4768b74",
     },
 ]
 
@@ -157,6 +185,7 @@ def home():
         profile=PROFILE,
         about=ABOUT,
         tech_stacks=TECH_STACKS,
+        certificates=CERTIFICATES,
         projects=PROJECTS,
     )
 
@@ -169,12 +198,46 @@ def contact():
 
     if not name or not email or not message:
         flash("Please fill in every field before sending.", "error")
+    elif len(name) > 120 or len(email) > 254 or len(message) > 5000:
+        flash("Please keep your name, email, and message within the field limits.", "error")
+    elif parseaddr(email)[1] != email or "@" not in email or any(char.isspace() for char in email):
+        flash("Please enter a valid email address.", "error")
     else:
-       
-        flash("Thanks — your message has been sent.", "success")
+        gmail_address = os.environ.get("GMAIL_ADDRESS", "").strip()
+        gmail_app_password = os.environ.get("GMAIL_APP_PASSWORD", "").replace(" ", "")
+        recipient = os.environ.get("CONTACT_RECIPIENT", gmail_address).strip()
+
+        if not gmail_address or not gmail_app_password or not recipient:
+            flash("Email is not configured yet. Please email me directly instead.", "error")
+        else:
+            notification = EmailMessage()
+            notification["Subject"] = "New portfolio contact message"
+            notification["From"] = gmail_address
+            notification["To"] = recipient
+            notification["Reply-To"] = email
+            notification.set_content(f"Name: {name}\nEmail: {email}\n\n{message}")
+
+            acknowledgement = EmailMessage()
+            acknowledgement["Subject"] = "Thanks for reaching out"
+            acknowledgement["From"] = gmail_address
+            acknowledgement["To"] = email
+            acknowledgement.set_content(
+                f"Hi {name},\n\nThanks for your message. I've received it and will get back to you soon.\n\nHimal"
+            )
+
+            try:
+                with smtplib.SMTP("smtp.gmail.com", 587, timeout=15) as smtp:
+                    smtp.starttls()
+                    smtp.login(gmail_address, gmail_app_password)
+                    smtp.send_message(notification)
+                    smtp.send_message(acknowledgement)
+                flash("Thanks — your message has been sent. A confirmation email is on its way.", "success")
+            except (OSError, smtplib.SMTPException):
+                app.logger.exception("Unable to send contact email")
+                flash("Sorry, your message could not be sent right now. Please email me directly.", "error")
 
     return redirect(url_for("home") + "#contact")
 
 
 if __name__ == "__main__":
-    app.run(debug=True,port=5003)
+    app.run(debug=os.environ.get("FLASK_DEBUG") == "1", port=int(os.environ.get("PORT", "5003")))

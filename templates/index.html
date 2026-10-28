@@ -21,16 +21,11 @@
     <!-- Canonical -->
     <link rel="canonical" href="https://himalsedhai.com">
 
-    <!-- Favicon -->
-    <link rel="icon"
-       <!-- Primary SVG Favicon -->
-<link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
-
-<!-- Fallback for older browsers -->
-<link rel="icon" type="image/x-icon" sizes="32x32" href="{{ url_for('static', filename='images/favicon.ico') }}">
-
-
-          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='images/favicon.svg') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -40,8 +35,7 @@
     <meta property="og:description"
           content="Portfolio showcasing Python, Flask, AI, RAG, Machine Learning, and Full Stack Development projects.">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
 <body>
@@ -49,7 +43,7 @@
   
   <header class="mobile-bar">
     <span class="mobile-bar__logo">{{ profile.name.split(' ')[0] }}</span>
-    <button class="mobile-bar__toggle" id="navToggle" aria-label="Open navigation">
+    <button class="mobile-bar__toggle" id="navToggle" aria-label="Open navigation" aria-controls="sidenav" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </header>
@@ -66,6 +60,7 @@
       <li><a href="#home" class="sidenav__link is-active" data-section="home">Home</a></li>
       <li><a href="#about" class="sidenav__link" data-section="about">About&nbsp;Me</a></li>
       <li><a href="#tech" class="sidenav__link" data-section="tech">Tech&nbsp;Stacks</a></li>
+      <li><a href="#certificates" class="sidenav__link" data-section="certificates">Certificates</a></li>
       <li><a href="#projects" class="sidenav__link" data-section="projects">Projects</a></li>
       <li><a href="#contact" class="sidenav__link" data-section="contact">Contact</a></li>
     </ul>
@@ -84,7 +79,7 @@
     <section id="home" class="section hero">
       <div class="hero__top">
         <p class="hero__eyebrow">Portfolio&nbsp;/&nbsp;{{ profile.location }}</p>
-        <p class="hero__index">00 — 04</p>
+        <p class="hero__index">00 — 05</p>
       </div>
 
       <div class="hero__main">
@@ -101,7 +96,7 @@
 
         <div class="hero__right">
          
-         <img class="hero__image"    src="{{ url_for('static', filename='images/photo.jpeg') }}" alt="Description of photo">
+         <img class="hero__image" src="{{ url_for('static', filename='images/photo.jpeg') }}" alt="Portrait of {{ profile.name }}">
           </div>
      
       </div>
@@ -171,20 +166,54 @@
 </section>
   
 
-    <section id="projects" class="section">
+    <section id="certificates" class="section">
       <div class="section__head">
         <span class="section__num">03</span>
+        <h2 class="section__title">Certificates</h2>
+      </div>
+
+      <div class="certificate-grid">
+        {% for certificate in certificates %}
+        <article class="certificate-card">
+          <div class="certificate-card__preview" aria-label="{{ certificate.title }} certificate preview">
+            <div class="certificate-card__issuer">
+              <span class="certificate-card__mark" aria-hidden="true">G</span>
+              <span>{{ certificate.issuer }}</span>
+              <span class="certificate-card__platform">{{ certificate.platform }}</span>
+            </div>
+            <p class="certificate-card__eyebrow">Course Certificate</p>
+            <h3 class="certificate-card__title">{{ certificate.title }}</h3>
+            <p class="certificate-card__recipient">Presented to {{ profile.name }}</p>
+            <div class="certificate-card__seal" aria-hidden="true">✓</div>
+          </div>
+          <div class="certificate-card__details">
+            <p class="certificate-card__meta">{{ certificate.date }} <span aria-hidden="true">·</span> {{ certificate.duration }}</p>
+            <a class="certificate-card__link" href="{{ certificate.link }}" target="_blank" rel="noopener noreferrer">
+              Verify certificate <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="section__head">
+        <span class="section__num">04</span>
         <h2 class="section__title">Projects</h2>
       </div>
 
       <div class="card-grid card-grid--projects">
         {% for project in projects %}
         <article class="card card--project">
-          <span class="card--project__num">{{ "%02d"|format(project.id) }}</span>
+          <div class="project-card__top">
+            <span class="card--project__num">{{ "%02d"|format(project.id) }}</span>
+            <span class="project-card__status">{{ project.status }}</span>
+          </div>
           <h3 class="card__title">{{ project.title }}</h3>
-          <p class="card__text">{{ project.description }}</p> <br>
+          <p class="card__text">{{ project.description }}</p>
           <p class="card__stack">{{ project.stack }}</p>
-          <a href="{{ project.link }}" class="card__link">View project →</a>
+          <a href="{{ project.link }}" class="card__link" target="_blank" rel="noopener noreferrer">View project <span aria-hidden="true">↗</span></a>
         </article>
         {% endfor %}
       </div>
@@ -193,7 +222,7 @@
 
     <section id="contact" class="section">
       <div class="section__head">
-        <span class="section__num">04</span>
+        <span class="section__num">05</span>
         <h2 class="section__title">Contact</h2>
       </div>
 
@@ -220,13 +249,13 @@
           {% endwith %}
 
           <label class="form__label" for="name">Name</label>
-          <input class="form__input" type="text" id="name" name="name" required>
+          <input class="form__input" type="text" id="name" name="name" autocomplete="name" maxlength="120" required>
 
           <label class="form__label" for="email">Email</label>
-          <input class="form__input" type="email" id="email" name="email" required>
+          <input class="form__input" type="email" id="email" name="email" autocomplete="email" maxlength="254" required>
 
           <label class="form__label" for="message">Message</label>
-          <textarea class="form__input form__textarea" id="message" name="message" rows="5" required></textarea>
+          <textarea class="form__input form__textarea" id="message" name="message" rows="5" maxlength="5000" required></textarea>
 
           <button type="submit" class="btn btn--solid btn--full">Send Message</button>
         </form>

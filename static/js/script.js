@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
   setActiveLink();
 
   var revealTargets = document.querySelectorAll(
-    '.section__head, .about__grid, .card-grid, .contact__grid'
+    '.section__head, .about__grid, .card-grid, .certificate-grid, .contact__grid'
   );
 
   if ('IntersectionObserver' in window) {
@@ -87,11 +87,17 @@ document.addEventListener('DOMContentLoaded', function () {
   function openMobileNav() {
     sidenav.classList.add('is-open');
     navScrim.classList.add('is-visible');
+    navToggle.setAttribute('aria-expanded', 'true');
+    navToggle.setAttribute('aria-label', 'Close navigation');
   }
 
   function closeMobileNav() {
     sidenav.classList.remove('is-open');
     navScrim.classList.remove('is-visible');
+    if (navToggle) {
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open navigation');
+    }
   }
 
   if (navToggle) {
@@ -107,6 +113,12 @@ document.addEventListener('DOMContentLoaded', function () {
   if (navScrim) {
     navScrim.addEventListener('click', closeMobileNav);
   }
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') {
+      closeMobileNav();
+    }
+  });
 
   
   let yearEl = document.getElementById('year');
