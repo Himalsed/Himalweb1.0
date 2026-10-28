@@ -4,10 +4,14 @@ import smtplib
 from email.message import EmailMessage
 from email.utils import parseaddr
 
+from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for, flash
+
+load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY") or secrets.token_hex(32)
+DEFAULT_GMAIL_ADDRESS = "himalsedhai10@gmail.com"
 
 
 
@@ -18,9 +22,10 @@ PROFILE = {
 "Currently, I'm building practical web applications while learning Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG)."
     ,
     "location": "Based in Nepal",
-    "email": os.environ.get(
-        "CONTACT_RECIPIENT",
-        os.environ.get("GMAIL_ADDRESS", "himalsedhai10@example.com"),
+    "email": (
+        os.environ.get("CONTACT_RECIPIENT")
+        or os.environ.get("GMAIL_ADDRESS")
+        or DEFAULT_GMAIL_ADDRESS
     ),
     "github": "https://github.com/Himalsed",
     "linkedin": "https://www.linkedin.com/in/himal-sedhai-32606a35b/",
@@ -183,12 +188,18 @@ def contact():
     elif parseaddr(email)[1] != email or "@" not in email or any(char.isspace() for char in email):
         flash("Please enter a valid email address.", "error")
     else:
-        gmail_address = os.environ.get("GMAIL_ADDRESS", "").strip()
-        gmail_app_password = os.environ.get("GMAIL_APP_PASSWORD", "").replace(" ", "")
-        recipient = os.environ.get("CONTACT_RECIPIENT", gmail_address).strip()
+        gmail_address = (os.environ.get("GMAIL_ADDRESS") or DEFAULT_GMAIL_ADDRESS).strip()
+        gmail_app_password = (
+            os.environ.get("GMAIL_APP_PASSWORD")
+            or os.environ.get("GMAIL_PASSWORD", "")
+        ).replace(" ", "")
+        recipient = (os.environ.get("CONTACT_RECIPIENT") or gmail_address).strip()
 
         if not gmail_address or not gmail_app_password or not recipient:
-            flash("Email is not configured yet. Please email me directly instead.", "error")
+            flash(
+                "Email is not configured yet. Add your Gmail app password in the environment before sending.",
+                "error",
+            )
         else:
             notification = EmailMessage()
             notification["Subject"] = "New portfolio contact message"
