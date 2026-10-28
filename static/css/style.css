@@ -1018,3 +1018,22 @@ body{
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;}
 }
+
+#contact .form__input{
+  width:100%;
+  min-height:44px;
+  padding:10px 0;
+  border:none;
+  border-bottom:1px solid #ccc;
+  background:transparent;
+  font:inherit;
+  font-size:15px;
+  color:#111;
+  box-shadow:none;
+}
+
+#contact .form__input:focus{
+  outline:none;
+  border-color:#111;
+  box-shadow:none;
+}
