@@ -57,12 +57,12 @@ TECH_STACKS = [
             {"name": "HTML5", "icon": "devicon-html5-plain colored"},
             {"name": "CSS3", "icon": "devicon-css3-plain colored"},
             {"name": "SQL", "icon": "devicon-azuresqldatabase-plain colored"},
-            {"name":"PHP","icon":"devicon-php-colored"}
+            {"name":"PHP","icon":"devicon-php-plain colored"}
             
         ],
     },
     {
-        "category": "Frameworks",
+        "category": "Frameworks & Runtime",
         "skills": [
             {"name": "Flask", "icon": "devicon-flask-original colored"},
             {"name": "React", "icon": "devicon-react-original colored"},
@@ -71,11 +71,11 @@ TECH_STACKS = [
         ],
     },
     {
-        "category": "Tools",
+        "category": "Developer Tools",
         "skills": [
             {"name": "Git", "icon": "devicon-git-plain colored"},
             {"name": "GitHub", "icon": "devicon-github-original colored"},
-            {"name": "VS Code", "icon": "devicon-vscode-plain colored"},
+            {"name": "Visual Studio Code", "icon": "devicon-vscode-plain colored"},
             {"name": "Figma", "icon": "devicon-figma-plain colored"},
   
         ],
@@ -87,25 +87,6 @@ TECH_STACKS = [
             {"name": "SQLite", "icon": "devicon-sqlite-plain colored"},
             {"name": "MongoDB", "icon": "devicon-mongodb-plain colored"}
         ],
-    },
-]
-
-CERTIFICATES = [
-    {
-        "title": "Crash Course on Python",
-        "issuer": "Google",
-        "platform": "Coursera",
-        "date": "July 13, 2026",
-        "duration": "20 hours",
-        "link": "https://coursera.org/share/25c3fd8dc708ac2f08192295c31fef1b",
-    },
-    {
-        "title": "Build Dynamic User Interfaces (UI) for Websites",
-        "issuer": "Google",
-        "platform": "Coursera",
-        "date": "August 23, 2026",
-        "duration": "15 hours",
-        "link": "https://coursera.org/share/d5b3710a626bd558bfd54880c4768b74",
     },
 ]
 
@@ -185,7 +166,6 @@ def home():
         profile=PROFILE,
         about=ABOUT,
         tech_stacks=TECH_STACKS,
-        certificates=CERTIFICATES,
         projects=PROJECTS,
     )
 
