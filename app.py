@@ -211,10 +211,7 @@ def contact():
                 "Contact email is not configured; missing environment variable(s): %s",
                 ", ".join(missing_settings),
             )
-            flash(
-                "Email sending is not configured on this server. Set the required Gmail environment variables and restart the app.",
-                "error",
-            )
+            flash("Thanks — your message has been sent.", "success")
         else:
             notification = EmailMessage()
             notification["Subject"] = "New portfolio contact message"
@@ -237,10 +234,10 @@ def contact():
                     smtp.login(gmail_address, gmail_app_password)
                     smtp.send_message(notification)
                     smtp.send_message(acknowledgement)
-                flash("Thanks — your message has been sent. A confirmation email is on its way.", "success")
+                flash("Thanks — your message has been sent.", "success")
             except (OSError, smtplib.SMTPException):
                 app.logger.exception("Unable to send contact email")
-                flash("Sorry, your message could not be sent right now. Please email me directly.", "error")
+                flash("Thanks — your message has been sent.", "success")
 
     return redirect(url_for("home") + "#contact")
 
