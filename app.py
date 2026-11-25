@@ -20,9 +20,9 @@ DEFAULT_GMAIL_ADDRESS = "himalsedhai10@gmail.com"
 
 PROFILE = {
     "name": "Himal Sedhai",
-    "role": "Full-Stack Developer",
+    "role": "Software & Aspiring Forward Deployed Engineering ",
     "tagline": "I am a Bachelor of Information Management (BIM) student from Nepal with a strong interest in Full Stack Development and Artificial Intelligence."
-"Currently, I'm building practical web applications while learning Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG)."
+"Currently, I'm building practical web-based applications while learning Forward Deployed Engineering,Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG)."
     ,
     "location": "Based in Nepal",
     "email": (
